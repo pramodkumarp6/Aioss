@@ -32,7 +32,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().setTitle("SinUp");
+        getSupportActionBar().setTitle("SignUp");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         country_code = findViewById(R.id.companycode);
@@ -40,6 +40,8 @@ public class SignUp extends AppCompatActivity {
         pin_id = findViewById(R.id.pin);
         confirm_pin = findViewById(R.id.rePin);
         password_id = findViewById(R.id.password);
+
+
 
 
 
@@ -52,7 +54,7 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                register();
+              //  register();
             }
         });
 
@@ -85,17 +87,17 @@ public class SignUp extends AppCompatActivity {
         String companyCode = country_code.getEditText().getText().toString();
         String user = user_id.getEditText().getText().toString();
         String pin = pin_id.getEditText().getText().toString();
-        String repin = confirm_pin.getEditText().getText().toString();
+       // String repin = confirm_pin.getEditText().getText().toString();
 
-        String pass = password_id.getEditText().getText().toString();
+       // String pass = password_id.getEditText().getText().toString();
 
 
         Log.d(user,"user_id");
         Log.d(companyCode,"companyCode");
         Log.d(pin,"pin");
 
-        Log.d(repin,"confirm_pin");
-        Log.d(pass,"pass");
+       // Log.d(repin,"confirm_pin");
+        //Log.d(pass,"pass");
 
 
 
@@ -125,13 +127,13 @@ public class SignUp extends AppCompatActivity {
             return;
 
         }*/
-     if (pass.length() < 8) {
+    /* if (pass.length() < 8) {
          password_id.setError("Password required");
          password_id.requestFocus();
             return;
         }
 
-
+*/
         Log.d(user,"user_id");
         Log.d(companyCode,"companyCode");
 

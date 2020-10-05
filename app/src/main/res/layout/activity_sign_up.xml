@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignIn">
@@ -62,10 +66,35 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=" UserId"
+                android:hint="email"
                 android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/y">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:inputType="text" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
 
 
 
@@ -81,7 +110,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pin"
+                android:hint="Password"
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
@@ -100,8 +129,131 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Finacial"
+                android:hint="Mobile"
                 android:inputType="text" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/state">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="State"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/city">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="City"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/pinCode">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Pincode"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/address">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Address"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/latitude">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Latitude"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            android:id="@+id/landmark">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Landmark"
+                android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -115,13 +267,13 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/rePin">
+            android:id="@+id/longitude">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:hint="Re-Pin"
+                android:hint="Longitude "
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
@@ -132,19 +284,25 @@
 
 
 
+
+
+
+
+
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
-            android:id="@+id/password">
+
+            android:id="@+id/gstNumber">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/password_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword" />
+                android:hint="GST Number"
+                android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -160,3 +318,5 @@
 
 
 </RelativeLayout>
+
+</ScrollView>

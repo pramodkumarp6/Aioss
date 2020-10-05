@@ -1,6 +1,8 @@
 package com.all.in.one.pramod.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.all.in.one.pramod.R;
+import com.all.in.one.pramod.SignIn;
+import com.all.in.one.pramod.models.SharedPrefManager;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -55,6 +59,36 @@ public class ProfileActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.profile, menu);
         return true;
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+           /* case R.id.menuLogout12:
+                Intent Notification = new Intent(this,Notification.class);
+                startActivity(Notification);
+                break;*/
+         /*   case R.id.nav_setting:
+                Intent intent1 = new Intent(this,Setting.class);
+                startActivity(intent1);
+                break;
+*/
+            case R.id.menuLogout:
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
+                finish();
+                 startActivity(new Intent(this, SignIn.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
