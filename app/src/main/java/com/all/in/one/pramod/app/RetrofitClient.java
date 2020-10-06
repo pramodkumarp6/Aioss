@@ -17,7 +17,7 @@ public class RetrofitClient {
 
 
 
-    private static final String BASE_URL = "http://aioss.co.in/aiossmobileapi/api/UserAuth/";
+    private static final String BASE_URL = "http://aioss.co.in/aiossmobileapi/api/";
 
    // http://aioss.co.in/aiossmobileapi/api/Utils/getAllStates
 

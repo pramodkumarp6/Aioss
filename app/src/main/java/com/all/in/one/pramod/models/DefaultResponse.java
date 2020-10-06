@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class DefaultResponse {
 
-    @SerializedName("error")
+    @SerializedName("status")
     private boolean err;
 
     @SerializedName("message")
