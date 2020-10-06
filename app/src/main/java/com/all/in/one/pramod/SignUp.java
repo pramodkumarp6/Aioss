@@ -24,6 +24,7 @@ public class SignUp extends AppCompatActivity {
     private TextInputLayout country_code;
     private TextInputLayout user_id;
     private TextInputLayout  pin_id;
+
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
 
@@ -54,7 +55,7 @@ public class SignUp extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-              //  register();
+                register();
             }
         });
 
@@ -106,6 +107,15 @@ public class SignUp extends AppCompatActivity {
             country_code.requestFocus();
             return;
         }
+
+
+        if (companyCode.length() <4) {
+            country_code.setError("Company Code  is required ");
+            country_code.requestFocus();
+            return;
+        }
+
+
 
        /* if (user.length() < 10)  {
             user_id.setError("Enter valid UserID");

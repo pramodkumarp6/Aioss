@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/userid">
+            android:id="@+id/emailid">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
