@@ -1,8 +1,7 @@
 package com.all.in.one.pramod.app;
 
 import com.all.in.one.pramod.models.DefaultResponse;
-import com.all.in.one.pramod.models.Financial;
-import com.all.in.one.pramod.models.Financial_Year;
+import com.all.in.one.pramod.models.Fincial;
 import com.all.in.one.pramod.models.User;
 import com.all.in.one.pramod.models.Users;
 
@@ -15,12 +14,18 @@ import retrofit2.http.POST;
 public interface Api {
 
 
+
+
+
     @POST("UserAuth/checkLogin")
     Call<ResponseBody> userLogin(@Body Users users);
 
 
     @POST("Utils/getFinancialYears")
-    Call<Financial_Year> loginFinacial(@Body Financial financial);
+    Call<ResponseBody> userfinacial(@Body Fincial fincial);
+
+
+
 
 
 

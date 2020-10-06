@@ -7,17 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.all.in.one.pramod.app.RetrofitClient;
 import com.all.in.one.pramod.models.DefaultResponse;
-import com.all.in.one.pramod.models.Financial;
-import com.all.in.one.pramod.models.Financial_Year;
 import com.all.in.one.pramod.models.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
 
@@ -28,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSelectedListener {
+public class SignIn extends AppCompatActivity {
    private ProgressDialog progressDialog;
    private TextView textRegister;
    private Button btn_Login;
@@ -37,9 +32,7 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
     private TextInputLayout  pin_id;
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
-    private  Financial financial;
-    private Spinner spinner;
-    String[] country = {"Select", "Financial_Year\": \"2019 - 2020","Financial_Year\": \"2020 - 2021"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,26 +43,13 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
         btn_Login = findViewById(R.id.btnlogin);
         progressDialog = new ProgressDialog(this);
 
-
-
-
-
         country_code = findViewById(R.id.companycode);
         user_id = findViewById(R.id.userid);
         pin_id = findViewById(R.id.pin);
         confirm_pin = findViewById(R.id.rePin);
         password_id = findViewById(R.id.password);
 
-        spinner= findViewById(R.id.spinnerFincial);
 
-        spinner.setOnItemSelectedListener(this);
-
-
-
-        ArrayAdapter aa = new ArrayAdapter(this,R.layout.spinner_item,country);
-        aa.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        spinner.setAdapter(aa);
 
 
 
@@ -77,7 +57,6 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
             @Override
             public void onClick(View v) {
                 login();
-                financial();
             }
         });
 
@@ -105,49 +84,12 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
         String pin = pin_id.getEditText().getText().toString();
         String repin = confirm_pin.getEditText().getText().toString();
         String password = password_id.getEditText().getText().toString();
-        String con = spinner.getSelectedItem().toString().trim();
-
-
-        if (companyCode.isEmpty() ) {
-            country_code.setError("Company Code  is required ");
-            country_code.requestFocus();
-            return;
-        }
-
-        if (userID.isEmpty())  {
-            user_id.setError("Enter valid UserID");
-            user_id.requestFocus();
-            return;
-        }
-
-
-
-        if (password.isEmpty()) {
-            password_id.setError("Password required");
-            password_id.requestFocus();
-            return;
-        }
-
-
-       if (pin.isEmpty()) {
-           pin_id.setError("Password required");
-           pin_id.requestFocus();
-            return;
-        }
-
-
-        if (repin.isEmpty()) {
-            confirm_pin.setError("Password required");
-            confirm_pin.requestFocus();
-            return;
-        }
-
 
 
 
 
         Users users = new  Users(companyCode,userID,password);
-        Financial financial = new Financial(companyCode);
+
                  System.out.println(users.getCompanyCode()+"Test");
                  System.out.println(users.getPassword()+"TestPassword");
                  System.out.println(users.getUserid()+"UserId");
@@ -177,9 +119,7 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
                 try {
                     String res = response.body().string();
 
-                   System.out.println(res);
-
-                   // Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -229,48 +169,4 @@ public class SignIn extends AppCompatActivity implements   AdapterView.OnItemSel
 
     }
 
-    public void financial(){
-        String companyCode = country_code.getEditText().getText().toString();
-        Financial financial = new Financial(companyCode);
-
-
-
-        Call<Financial_Year> call = RetrofitClient.getInstance().getApi().loginFinacial(financial);
-        System.out.println(financial.getCompanyCode());
-
-
-        call.enqueue(new Callback<Financial_Year>() {
-            @Override
-            public void onResponse(Call<Financial_Year> call, Response<Financial_Year> response) {
-
-
-
-
-
-
-                progressDialog.dismiss();
-
-
-            }
-
-            @Override
-            public void onFailure(Call<Financial_Year> call, Throwable t) {
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
-
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
