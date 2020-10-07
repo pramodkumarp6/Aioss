@@ -65,10 +65,10 @@ public class ProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch(item.getItemId()) {
-           /* case R.id.menuLogout12:
-                Intent Notification = new Intent(this,Notification.class);
+           case R.id.nav_notification:
+                Intent Notification = new Intent(this,Notifications.class);
                 startActivity(Notification);
-                break;*/
+                break;
             case R.id.nav_setting:
                 Intent intent1 = new Intent(this,Setting.class);
                 startActivity(intent1);

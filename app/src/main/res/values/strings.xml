@@ -37,4 +37,5 @@
 
 
     <string name="todo">TODO</string>
+    <string name="notification">Notification</string>
 </resources>
