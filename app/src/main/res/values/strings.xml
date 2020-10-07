@@ -12,4 +12,29 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="login">Login</string>
+    <string name="company_code">Company Code</string>
+    <string name="email">email</string>
+    <string name="name">Name</string>
+
+    <string name="mobile">Mobile</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="pincode">Pincode</string>
+    <string name="address">Address</string>
+    <string name="latitude">Latitude</string>
+    <string name="landmark">Landmark</string>
+    <string name="longitude">Longitude</string>
+    <string name="gst_number">GST Number</string>
+    <string name="Password">Password</string>
+    <string name="signup">SignUP</string>
+    <string name="register_as_customer">Register As Customer</string>
+    <string name="sign_in">Sign In</string>
+    <string name="re_pin">Re-Pin</string>
+    <string name="pin">Pin</string>
+    <string name="password">Password</string>
+    <string name="userid">UserId</string>
+
+
+    <string name="todo">TODO</string>
 </resources>
