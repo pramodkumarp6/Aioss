@@ -94,7 +94,7 @@ public class SignUp extends AppCompatActivity {
 
         String companyCode = country_code.getEditText().getText().toString();
        // String user = user_id.getEditText().getText().toString();
-        String pin = pin_id.getEditText().getText().toString();
+//        String pin = pin_id.getEditText().getText().toString();
        // String repin = confirm_pin.getEditText().getText().toString();
 
        // String pass = password_id.getEditText().getText().toString();
@@ -102,7 +102,7 @@ public class SignUp extends AppCompatActivity {
 
         //Log.d(user,"user_id");
         Log.d(companyCode,"companyCode");
-        Log.d(pin,"pin");
+      //  Log.d(pin,"pin");
 
        // Log.d(repin,"confirm_pin");
         //Log.d(pass,"pass");

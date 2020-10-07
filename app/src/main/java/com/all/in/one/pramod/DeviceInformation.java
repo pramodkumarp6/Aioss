@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class DeviceInformation extends AppCompatActivity {
-    String information ;
+    String information;
     Build build;
-    Build.VERSION  version;
+    Build.VERSION version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,25 +17,8 @@ public class DeviceInformation extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.deviceid);
 
-        deviceInformation();
+        information = "Device id = " + Build.DEVICE + "\n" + "Device Model = " + Build.MODEL + "\n";
+
         textView.setText(information);
-
-
-    }
-
-    public void deviceInformation(){
-
-        information = "Device id = "+ Build.DEVICE +"\n" + "Device Model = " + Build.MODEL +"\n";
-
-
-
-
-
-
-
-
-
-
-
     }
 }
