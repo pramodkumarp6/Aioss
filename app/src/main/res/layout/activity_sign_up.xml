@@ -96,12 +96,12 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/Finalcial">
+            android:id="@+id/mobile">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/mobile"
+                android:hint="Mobile"
                 android:maxLength="11"
                 android:inputType="number" />
 
@@ -178,7 +178,7 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/address">
+            android:id="@+id/addressSignup">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            android:id="@+id/landmark">
+            android:id="@+id/landmarkSignup">
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"

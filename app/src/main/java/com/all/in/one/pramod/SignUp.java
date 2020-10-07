@@ -1,6 +1,7 @@
 package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +20,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.os.Build.DEVICE;
+
 public class SignUp extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextInputLayout country_code;
     private TextInputLayout user_id;
+    private TextInputLayout Name_singup;
+    private TextInputLayout mobile_signup;
+
+    private TextInputLayout name_persion;
+    private TextInputLayout address_signup;
+    private TextInputLayout landmark_signup;
+    private TextInputLayout gstno_signup;
+
+
+
     private TextInputLayout  pin_id;
     private TextInputLayout  email_id;
     private TextInputLayout  confirm_pin;
@@ -38,15 +51,17 @@ public class SignUp extends AppCompatActivity {
 
         country_code = findViewById(R.id.companycode);
         email_id = findViewById(R.id.emailid);
-        email_id = findViewById(R.id.emailid);
+        name_persion = findViewById(R.id.name);
+        mobile_signup = findViewById(R.id.mobile);
 
 
+        pin_id = findViewById(R.id.pinCode);
+        landmark_signup = findViewById(R.id.landmarkSignup);
 
+        address_signup = findViewById(R.id.addressSignup);
 
+        gstno_signup = findViewById(R.id.gstNumber);
 
-        user_id = findViewById(R.id.userid);
-        pin_id = findViewById(R.id.pin);
-        confirm_pin = findViewById(R.id.rePin);
         password_id = findViewById(R.id.password);
 
 
@@ -91,21 +106,35 @@ public class SignUp extends AppCompatActivity {
     public void register(){
 
 
+        String  device_id    =  Build.DEVICE ;
+        String  device_Model =  Build.MODEL ;
 
         String companyCode = country_code.getEditText().getText().toString();
-       // String user = user_id.getEditText().getText().toString();
-//        String pin = pin_id.getEditText().getText().toString();
-       // String repin = confirm_pin.getEditText().getText().toString();
+        String email = email_id.getEditText().getText().toString();
+        String name = name_persion.getEditText().getText().toString();
+        String mobile = mobile_signup.getEditText().getText().toString();
+        String pin = pin_id.getEditText().getText().toString();
+        String landmark = landmark_signup.getEditText().getText().toString();
+        String address = address_signup.getEditText().getText().toString();
+        String gst = gstno_signup.getEditText().getText().toString();
 
-       // String pass = password_id.getEditText().getText().toString();
+        String pass = password_id.getEditText().getText().toString();
 
 
-        //Log.d(user,"user_id");
+
         Log.d(companyCode,"companyCode");
-      //  Log.d(pin,"pin");
+        Log.d(device_id,"device");
+        Log.d(device_Model,"device_Model");
 
-       // Log.d(repin,"confirm_pin");
-        //Log.d(pass,"pass");
+
+
+        Log.d(email,"email");
+        Log.d(name,"name");
+        Log.d(mobile,"mobile");
+        Log.d(pin,"pin");
+        Log.d(landmark,"landmark");
+        Log.d(address,"adres");
+        Log.d(gst,"gst");
 
 
 
