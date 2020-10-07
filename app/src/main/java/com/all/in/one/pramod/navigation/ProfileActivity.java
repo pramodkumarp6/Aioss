@@ -69,11 +69,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent Notification = new Intent(this,Notification.class);
                 startActivity(Notification);
                 break;*/
-         /*   case R.id.nav_setting:
+            case R.id.nav_setting:
                 Intent intent1 = new Intent(this,Setting.class);
                 startActivity(intent1);
                 break;
-*/
+
             case R.id.menuLogout:
                 SharedPrefManager.getInstance(getApplicationContext()).logout();
                 finish();

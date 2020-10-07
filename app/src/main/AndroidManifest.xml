@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DeviceInformation"></activity>
+        <activity android:name=".navigation.Setting"></activity>
+        <activity android:name=".DeviceInformation" />
         <activity
             android:name=".navigation.ProfileActivity"
             android:label="@string/title_activity_profile"

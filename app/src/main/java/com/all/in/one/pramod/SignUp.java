@@ -132,7 +132,7 @@ public class SignUp extends AppCompatActivity {
 
 
 
-       /* if (password.length() < 8) {
+        /*if (password.length() < 8) {
             editPass.setError("Password required");
             editPass.requestFocus();
             return;
