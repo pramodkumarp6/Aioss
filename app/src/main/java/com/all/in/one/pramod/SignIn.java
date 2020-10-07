@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import com.all.in.one.pramod.app.RetrofitClient;
 import com.all.in.one.pramod.models.DefaultResponse;
+import com.all.in.one.pramod.models.Financial;
+import com.all.in.one.pramod.models.Fincial;
 import com.all.in.one.pramod.models.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,6 +35,7 @@ public class SignIn extends AppCompatActivity {
     private TextInputLayout  pin_id;
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
+    private Financial financial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,19 @@ public class SignIn extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         country_code = findViewById(R.id.companycode);
+        country_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String companyCode = country_code.getEditText().getText().toString();
+                Financial financial = new Financial(companyCode);
+                Log.d(companyCode,"company");
+
+                financial();
+
+            }
+        });
+
+
         user_id = findViewById(R.id.userid);
         pin_id = findViewById(R.id.pin);
         confirm_pin = findViewById(R.id.rePin);
@@ -80,6 +97,7 @@ public class SignIn extends AppCompatActivity {
 
 
         String companyCode = country_code.getEditText().getText().toString();
+
         String userID = user_id.getEditText().getText().toString();
         String pin = pin_id.getEditText().getText().toString();
         String repin = confirm_pin.getEditText().getText().toString();
@@ -90,9 +108,6 @@ public class SignIn extends AppCompatActivity {
 
         Users users = new  Users(companyCode,userID,password);
 
-                 System.out.println(users.getCompanyCode()+"Test");
-                 System.out.println(users.getPassword()+"TestPassword");
-                 System.out.println(users.getUserid()+"UserId");
 
 
 
@@ -101,7 +116,7 @@ public class SignIn extends AppCompatActivity {
 
 
 
-        progressDialog.show();
+       // progressDialog.show();
 
        // Intent intent = new Intent(SignIn.this, ProfileActivity.class);
        // startActivity(intent);
@@ -118,7 +133,7 @@ public class SignIn extends AppCompatActivity {
 
                 try {
                     String res = response.body().string();
-
+                    System.out.println(res);
                     Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -136,14 +151,14 @@ public class SignIn extends AppCompatActivity {
 
                // DefaultResponse loginResponse = response.body();
 
-               // Intent intent = new Intent(SignIn.this, ProfileActivity.class);
-               // startActivity(intent);
+                Intent intent = new Intent(SignIn.this, ProfileActivity.class);
+               startActivity(intent);
 
 
                 // progressDialog.dismiss();
              //   if (!loginResponse.isErr()) {
                     // progressDialog.dismiss();
-                    finish();
+                   // finish();
                    // SharedPrefManager.getInstance(Login.this).saveUser(loginResponse.getUser());
                   //  Intent intent = new Intent(SignIn.this, ProfileActivity.class);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -167,6 +182,59 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public  void financial(){
+       String companyCode = country_code.getEditText().getText().toString();
+        Financial financial = new Financial(companyCode);
+
+        Call<ResponseBody> call = RetrofitClient.getInstance().getApi().userfinacial(financial);
+
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+
+
+
+                try {
+                    String res = response.body().string();
+                    System.out.println(res);
+                    Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+         /*  if(!response.isSuccessful()){
+
+
+           }*/
+        /*   // List<Fincial> fin = response.body();
+
+           for(Fincial fins: fin){
+
+               String contents ="";
+               contents += "Final"+fins.getStatus();
+
+               System.out.println(fins.getStatus()+"hello");
+
+           }
+*/
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
     }
 
 }

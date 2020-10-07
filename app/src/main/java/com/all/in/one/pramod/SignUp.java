@@ -24,7 +24,7 @@ public class SignUp extends AppCompatActivity {
     private TextInputLayout country_code;
     private TextInputLayout user_id;
     private TextInputLayout  pin_id;
-
+    private TextInputLayout  email_id;
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
 
@@ -37,6 +37,13 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         country_code = findViewById(R.id.companycode);
+        email_id = findViewById(R.id.emailid);
+        email_id = findViewById(R.id.emailid);
+
+
+
+
+
         user_id = findViewById(R.id.userid);
         pin_id = findViewById(R.id.pin);
         confirm_pin = findViewById(R.id.rePin);
@@ -86,14 +93,14 @@ public class SignUp extends AppCompatActivity {
 
 
         String companyCode = country_code.getEditText().getText().toString();
-        String user = user_id.getEditText().getText().toString();
+       // String user = user_id.getEditText().getText().toString();
         String pin = pin_id.getEditText().getText().toString();
        // String repin = confirm_pin.getEditText().getText().toString();
 
        // String pass = password_id.getEditText().getText().toString();
 
 
-        Log.d(user,"user_id");
+        //Log.d(user,"user_id");
         Log.d(companyCode,"companyCode");
         Log.d(pin,"pin");
 
@@ -144,7 +151,7 @@ public class SignUp extends AppCompatActivity {
         }
 
 */
-        Log.d(user,"user_id");
+        //Log.d(user,"user_id");
         Log.d(companyCode,"companyCode");
 
 
