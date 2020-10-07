@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:ellipsize="marquee"
-    android:textSize="20sp"
+    android:gravity="center"
 
     android:paddingLeft="20dp"
 
-    android:gravity="center"
+    android:singleLine="true"
     android:textColor="#FF1B79A3"
-    android:singleLine="true" />
+    android:textSize="20sp" />
