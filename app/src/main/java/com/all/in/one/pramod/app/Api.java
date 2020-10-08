@@ -25,7 +25,7 @@ public interface Api {
 
 
     @POST("Utils/getFinancialYears")
-    Call<ResponseBody> userfinacial(@Body Financial financial);
+    Call<Fincial> userfinacial(@Body Financial financial);
 
 
 

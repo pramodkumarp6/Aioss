@@ -2,12 +2,18 @@ package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +23,11 @@ import com.all.in.one.pramod.models.Financial;
 import com.all.in.one.pramod.models.Fincial;
 import com.all.in.one.pramod.models.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -26,16 +35,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.R.*;
+
 public class SignIn extends AppCompatActivity {
    private ProgressDialog progressDialog;
    private TextView textRegister;
    private Button btn_Login;
-    private TextInputLayout country_code;
+    private TextInputEditText country_code;
     private TextInputLayout user_id;
     private TextInputLayout  pin_id;
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
     private Financial financial;
+    private Spinner spinner_finacil;
+    ArrayList<String> DistricName = new ArrayList<>();
+    ArrayList<String> DistricNameID = new ArrayList<>();
+    String[] country = { "India", "USA", "China", "Japan", "Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +61,76 @@ public class SignIn extends AppCompatActivity {
         textRegister = findViewById(R.id.register);
         btn_Login = findViewById(R.id.btnlogin);
         progressDialog = new ProgressDialog(this);
+        spinner_finacil = findViewById(R.id.fnacl);
+       spinner_finacil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+
 
         country_code = findViewById(R.id.companycode);
-        country_code.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+        country_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                System.out.println(charSequence);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                // System.out.println(charSequence);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*country_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String companyCode = country_code.getEditText().getText().toString();
+                String companyCode = country_code.getText().toString();
                 Financial financial = new Financial(companyCode);
                 Log.d(companyCode,"company");
 
@@ -59,7 +138,7 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
-
+*/
 
         user_id = findViewById(R.id.userid);
         pin_id = findViewById(R.id.pin);
@@ -96,7 +175,7 @@ public class SignIn extends AppCompatActivity {
     public void login(){
 
 
-        String companyCode = country_code.getEditText().getText().toString();
+        String companyCode = country_code.getText().toString();
 
         String userID = user_id.getEditText().getText().toString();
         String pin = pin_id.getEditText().getText().toString();
@@ -186,55 +265,71 @@ public class SignIn extends AppCompatActivity {
 
 
     public  void financial(){
-       String companyCode = country_code.getEditText().getText().toString();
+       String companyCode = country_code.getText().toString();
         Financial financial = new Financial(companyCode);
 
-        Call<ResponseBody> call = RetrofitClient.getInstance().getApi().userfinacial(financial);
+        Call<Fincial> call = RetrofitClient.getInstance().getApi().userfinacial(financial);
 
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<Fincial>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-
-
+            public void onResponse(Call<Fincial> call, Response<Fincial> response) {
 
                 try {
-                    String res = response.body().string();
-                    System.out.println(res);
-                    Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
-                } catch (IOException e) {
+
+
+                    Fincial financialmodel = response.body();
+                    System.out.println(financialmodel);
+
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    Log.e("fincilyear:", gson.toJson(financialmodel));
+                    DistricName.clear();
+                    DistricNameID.clear();
+
+                    DistricName.add("Select Finanacial Year");
+                    DistricNameID.add("125");
+                    if (financialmodel.getStatus()==1) {
+                        for (int i = 0; i < financialmodel.getData().size(); i++) {
+
+                            DistricName.add(financialmodel.getData().get(i).getFinancial_Year());
+
+                            DistricNameID.add(financialmodel.getData().get(i).getId());
+                        }
+
+                       ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item, DistricName);
+
+
+                        dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+                        spinner_finacil.setAdapter(dataAdapter12);
+
+
+
+
+
+
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Finacial is  not available", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-         /*  if(!response.isSuccessful()){
-
-
-           }*/
-        /*   // List<Fincial> fin = response.body();
-
-           for(Fincial fins: fin){
-
-               String contents ="";
-               contents += "Final"+fins.getStatus();
-
-               System.out.println(fins.getStatus()+"hello");
-
-           }
-*/
-
-
-
             }
 
+
+
+
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                progressDialog.dismiss();
+            public void onFailure(Call<Fincial> call, Throwable t) {
+
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                 finish();
             }
         });
     }
+
 
 }

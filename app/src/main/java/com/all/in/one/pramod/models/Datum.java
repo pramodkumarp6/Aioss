@@ -7,7 +7,7 @@ public class Datum {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("financial_Year")
+    @SerializedName("Financial_Year")
     @Expose
     private String financial_Year;
 

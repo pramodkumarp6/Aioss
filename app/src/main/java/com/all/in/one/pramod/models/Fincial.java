@@ -8,16 +8,13 @@ import java.util.List;
 public class Fincial {
     @SerializedName("status")
     @Expose
-    private String status;
-    @SerializedName("data")
-    @Expose
-    private List<Datum> data;
+    private Integer status;
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -28,4 +25,12 @@ public class Fincial {
     public void setData(List<Datum> data) {
         this.data = data;
     }
+
+    @SerializedName("data")
+    @Expose
+    private List<Datum> data = null;
+
+
+
+
 }
