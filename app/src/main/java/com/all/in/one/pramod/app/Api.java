@@ -1,24 +1,20 @@
 package com.all.in.one.pramod.app;
 
-import com.all.in.one.pramod.models.DefaultResponse;
-import com.all.in.one.pramod.models.Financial;
-import com.all.in.one.pramod.models.Fincial;
-import com.all.in.one.pramod.models.User;
+import com.all.in.one.pramod.models.finacal.Financial;
+import com.all.in.one.pramod.models.finacal.Fincial;
 import com.all.in.one.pramod.models.Users;
-
-import java.util.List;
+import com.all.in.one.pramod.models.stateModel.StateModel;
+import com.all.in.one.pramod.models.stateModel.States;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface Api {
 
 
-
-
+    /****************************SignIn**********************************************/
 
     @POST("UserAuth/checkLogin")
     Call<ResponseBody> userLogin(@Body Users users);
@@ -28,9 +24,8 @@ public interface Api {
     Call<Fincial> userfinacial(@Body Financial financial);
 
 
+    /**************************************SingUp************************************/
 
-
-
-
-
+    @POST("Utils/getAllStates")
+    Call<StateModel> userfinacial(@Body States states);
 }

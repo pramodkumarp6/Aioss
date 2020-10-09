@@ -18,9 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.all.in.one.pramod.app.RetrofitClient;
-import com.all.in.one.pramod.models.DefaultResponse;
-import com.all.in.one.pramod.models.Financial;
-import com.all.in.one.pramod.models.Fincial;
+import com.all.in.one.pramod.models.finacal.Financial;
+import com.all.in.one.pramod.models.finacal.Fincial;
 import com.all.in.one.pramod.models.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
 import com.google.gson.Gson;
@@ -28,14 +27,11 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.R.*;
 
 public class SignIn extends AppCompatActivity {
    private ProgressDialog progressDialog;
@@ -50,7 +46,7 @@ public class SignIn extends AppCompatActivity {
     private Spinner spinner_finacil;
     ArrayList<String> DistricName = new ArrayList<>();
     ArrayList<String> DistricNameID = new ArrayList<>();
-    String[] country = { "India", "USA", "China", "Japan", "Other"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +58,7 @@ public class SignIn extends AppCompatActivity {
         btn_Login = findViewById(R.id.btnlogin);
         progressDialog = new ProgressDialog(this);
         spinner_finacil = findViewById(R.id.fnacl);
-       spinner_finacil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_finacil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 

@@ -44,11 +44,12 @@
             app:errorEnabled="true"
             app:counterEnabled="true"
 
-            android:id="@+id/companycode">
+            >
 
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/companycode"
                 android:hint="@string/company_code"
                 android:textAllCaps="true"
                 android:inputType="text" />
@@ -108,21 +109,13 @@
         </android.support.design.widget.TextInputLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:counterEnabled="true"
-            android:id="@+id/state">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:hint="@string/state"
-                android:inputType="number" />
-
-        </android.support.design.widget.TextInputLayout>
+       <Spinner
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
+        android:gravity="left"
+        android:visibility="visible"></Spinner>
 
 
 

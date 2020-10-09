@@ -1,10 +1,10 @@
-package com.all.in.one.pramod.models;
+package com.all.in.one.pramod.models.stateModel;
 
-public class Financial {
+public class States {
 
     private String companyCode;
 
-    public Financial(String companyCode) {
+    public States(String companyCode) {
         this.companyCode = companyCode;
     }
 
@@ -15,4 +15,6 @@ public class Financial {
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
     }
+
+
 }

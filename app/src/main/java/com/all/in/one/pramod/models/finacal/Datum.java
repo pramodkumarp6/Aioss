@@ -1,4 +1,4 @@
-package com.all.in.one.pramod.models;
+package com.all.in.one.pramod.models.finacal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
