@@ -42,7 +42,7 @@ public class SignIn extends AppCompatActivity {
    private TextView textRegister;
    private Button btn_Login;
     private TextInputEditText country_code;
-    private TextInputLayout user_id;
+    private TextInputEditText user_id;
     private TextInputLayout  pin_id;
     private TextInputLayout  confirm_pin;
     private TextInputLayout  password_id;
@@ -84,24 +84,41 @@ public class SignIn extends AppCompatActivity {
 
 
 
-        country_code.addTextChangedListener(new TextWatcher() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        user_id = findViewById(R.id.userid);
+
+        user_id.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                System.out.println(charSequence);
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                spinner_finacil.setVisibility((s.length() > 1) ? View.VISIBLE : View.GONE);
             }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                // System.out.println(charSequence);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+            });
 
 
 
@@ -111,23 +128,7 @@ public class SignIn extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*country_code.setOnClickListener(new View.OnClickListener() {
+        country_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String companyCode = country_code.getText().toString();
@@ -138,9 +139,16 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
-*/
 
-        user_id = findViewById(R.id.userid);
+
+
+
+
+
+
+
+
+
         pin_id = findViewById(R.id.pin);
         confirm_pin = findViewById(R.id.rePin);
         password_id = findViewById(R.id.password);
@@ -177,7 +185,7 @@ public class SignIn extends AppCompatActivity {
 
         String companyCode = country_code.getText().toString();
 
-        String userID = user_id.getEditText().getText().toString();
+        String userID = user_id.getText().toString();
         String pin = pin_id.getEditText().getText().toString();
         String repin = confirm_pin.getEditText().getText().toString();
         String password = password_id.getEditText().getText().toString();

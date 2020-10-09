@@ -65,9 +65,11 @@
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 app:counterEnabled="true"
-                android:id="@+id/userid">
+               >
 
                 <android.support.design.widget.TextInputEditText
+
+                    android:id="@+id/userid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/userid"
@@ -93,15 +95,15 @@
 
             </android.support.design.widget.TextInputLayout>
 
-         <Spinner
-             android:id="@+id/fnacl"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:gravity="center"
-             android:visibility= "visible">
 
 
-         </Spinner>
+            <Spinner
+                android:id="@+id/fnacl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:gravity="left"
+                android:visibility="gone"></Spinner>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
