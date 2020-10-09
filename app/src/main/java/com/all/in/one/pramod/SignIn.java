@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.all.in.one.pramod.app.RetrofitClient;
 import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
-import com.all.in.one.pramod.models.Users;
+import com.all.in.one.pramod.models.signInModel.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

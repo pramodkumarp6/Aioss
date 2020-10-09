@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.all.in.one.pramod.SignIn;
+import com.all.in.one.pramod.models.signInModel.User;
 
 public class SharedPrefManager {
 

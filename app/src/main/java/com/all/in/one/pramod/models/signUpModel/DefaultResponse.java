@@ -1,4 +1,4 @@
-package com.all.in.one.pramod.models;
+package com.all.in.one.pramod.models.signUpModel;
 
 import com.google.gson.annotations.SerializedName;
 

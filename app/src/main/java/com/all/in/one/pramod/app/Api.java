@@ -2,7 +2,7 @@ package com.all.in.one.pramod.app;
 
 import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
-import com.all.in.one.pramod.models.Users;
+import com.all.in.one.pramod.models.signInModel.Users;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
 
