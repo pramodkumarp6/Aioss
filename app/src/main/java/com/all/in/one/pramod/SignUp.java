@@ -6,6 +6,8 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import com.all.in.one.pramod.app.RetrofitClient;
 
 
+import com.all.in.one.pramod.models.signUpModel.DefaultResponse;
+import com.all.in.one.pramod.models.signUpModel.RegisterModel;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
 import com.google.gson.Gson;
@@ -53,8 +57,6 @@ public class SignUp extends AppCompatActivity {
 
     ArrayList<String> stateNames = new ArrayList<>();
     ArrayList<String> CitisNames = new ArrayList<>();
-  // String[] CitisNames = { "balrampur", "Noida", "Aligrath", "Mobai", "kalta"};
-
 
 
     private Button btn_sigup;
@@ -66,17 +68,7 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().setTitle("SignUp");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-        ArrayList<String> stateCitis = new ArrayList<>();
-
-                  stateCitis.add("Select Cities");
-
-
-
-
-
-
+        progressDialog = new ProgressDialog(this);
 
         country_code = findViewById(R.id.companycode);
         spinnerState = findViewById(R.id.state);
@@ -93,6 +85,39 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+
+        country_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                System.out.println(charSequence);
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String s = editable.toString();
+                States states = new States(s);
+                state();
+
+            }
+        });
+
+
+        ArrayList<String> stateNames = new ArrayList<>();
+        stateNames.add("Select State");
+        ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, stateNames);
+        dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerState.setAdapter(dataAdapter12);
+
+
         /***********************city*************************************************************/
 
         spinnerCity = findViewById(R.id.city);
@@ -108,17 +133,14 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        City();
-        country_code.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String companyCode = country_code.getText().toString();
-                States states = new States(companyCode);
-                Log.d(companyCode, "company");
+        ArrayList<String> stateCitis = new ArrayList<>();
+        CitisNames.add("Select City");
+        ArrayAdapter<String> datacity = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, CitisNames);
+        dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCity.setAdapter(datacity);
 
-                state();
-            }
-        });
+
+        City();
 
 
         email_id = findViewById(R.id.emailid);
@@ -156,11 +178,13 @@ public class SignUp extends AppCompatActivity {
 
         String device_id = Build.DEVICE;
         String device_Model = Build.MODEL;
-
         String companyCode = country_code.getText().toString();
         String email = email_id.getEditText().getText().toString();
         String name = name_persion.getEditText().getText().toString();
         String mobile = mobile_signup.getEditText().getText().toString();
+        String States = spinnerState.getSelectedItem().toString().trim();
+
+        String city = spinnerCity.getSelectedItem().toString().trim();
         String pin = pin_id.getEditText().getText().toString();
         String landmark = landmark_signup.getEditText().getText().toString();
         String address = address_signup.getEditText().getText().toString();
@@ -169,18 +193,6 @@ public class SignUp extends AppCompatActivity {
         String pass = password_id.getEditText().getText().toString();
 
 
-        Log.d(companyCode, "companyCode");
-        Log.d(device_id, "device");
-        Log.d(device_Model, "device_Model");
-
-
-        Log.d(email, "email");
-        Log.d(name, "name");
-        Log.d(mobile, "mobile");
-        Log.d(pin, "pin");
-        Log.d(landmark, "landmark");
-        Log.d(address, "adres");
-        Log.d(gst, "gst");
 
 
         if (companyCode.isEmpty()) {
@@ -206,6 +218,22 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
+        if (spinnerState.getSelectedItem().toString().trim().equalsIgnoreCase("Select State")) {
+            Toast.makeText(this, "Select  State", Toast.LENGTH_SHORT).show();
+
+            return;
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         if (pin.isEmpty()) {
             Toast.makeText(SignUp.this, "Pin Code  number is Required", Toast.LENGTH_SHORT).show();
@@ -228,20 +256,21 @@ public class SignUp extends AppCompatActivity {
         }
 
 
-
-       /* progressDialog.setMessage("Registering user...");
+        progressDialog.setMessage("Registering user...");
         progressDialog.show();
 
-        Call<DefaultResponse> call = RetrofitClient.getInstance().getApi().createUser( );
+        RegisterModel registerModel = new RegisterModel(companyCode, email, name, mobile, pin, landmark, address, gst, device_id, device_Model, States,city);
+
+
+        Call<DefaultResponse> call = RetrofitClient.getInstance().getApi().userCreate(registerModel);
 
 
         call.enqueue(new Callback<DefaultResponse>() {
             @Override
-            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response)
-            {
+            public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 progressDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), response.body().getMsg(), Toast.LENGTH_LONG).show();
 
 
             }
@@ -254,7 +283,6 @@ public class SignUp extends AppCompatActivity {
         });
 
 
-*/
     }
 
 
@@ -262,7 +290,7 @@ public class SignUp extends AppCompatActivity {
         String companyCode = country_code.getText().toString();
         States states = new States(companyCode);
 
-        Call<StateModel> call = RetrofitClient.getInstance().getApi().userfinacial(states);
+        Call<StateModel> call = RetrofitClient.getInstance().getApi().userState(states);
 
 
         call.enqueue(new Callback<StateModel>() {
@@ -291,16 +319,12 @@ public class SignUp extends AppCompatActivity {
                         }
 
                         ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, stateNames);
-
-
                         dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
                         spinnerState.setAdapter(dataAdapter12);
 
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "States is  not available", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "States is  not available", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -318,15 +342,14 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-
-    public void City(){
-
+    public void City() {
 
 
-    /*    String companyCode = country_code.getText().toString();
+        String companyCode = country_code.getText().toString();
         States states = new States(companyCode);
 
-        Call<StateModel> call = RetrofitClient.getInstance().getApi().userfinacial();
+
+        Call<StateModel> call = RetrofitClient.getInstance().getApi().userCity(states);
 
 
         call.enqueue(new Callback<StateModel>() {
@@ -344,7 +367,7 @@ public class SignUp extends AppCompatActivity {
                     CitisNames.clear();
 
 
-                    CitisNames.add("Select Cities");
+                    CitisNames.add("Select City");
 
                     if (stateModel.getStatus() == 1) {
                         for (int i = 0; i < stateModel.getData().size(); i++) {
@@ -355,11 +378,7 @@ public class SignUp extends AppCompatActivity {
                         }
 
                         ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, CitisNames);
-
-
                         dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
                         spinnerState.setAdapter(dataAdapter12);
 
 
@@ -379,7 +398,7 @@ public class SignUp extends AppCompatActivity {
                 finish();
             }
         });
-*/
+
     }
 
 

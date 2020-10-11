@@ -101,20 +101,6 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-/*
-
-        country_code.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String companyCode = country_code.getText().toString();
-                Financial financial = new Financial(companyCode);
-                Log.d(companyCode, "company");
-
-                financial();
-
-            }
-        });
-*/
 
 
 
@@ -199,7 +185,7 @@ public class SignIn extends AppCompatActivity {
         String companyCode = country_code.getText().toString();
         final String userID = user_id.getText().toString();
            String  f = spinner_finacil.getSelectedItem().toString().trim();
-         Log.d(f,"noida");
+
         String pin = pin_id.getEditText().getText().toString();
         final String repin = confirm_pin.getEditText().getText().toString();
         String password = password_id.getEditText().getText().toString();

@@ -4,6 +4,8 @@ import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
 import com.all.in.one.pramod.models.signInModel.UserSignModel;
 import com.all.in.one.pramod.models.signInModel.Users;
+import com.all.in.one.pramod.models.signUpModel.DefaultResponse;
+import com.all.in.one.pramod.models.signUpModel.RegisterModel;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
 
@@ -26,7 +28,19 @@ public interface Api {
 
 
     /**************************************SingUp************************************/
-
     @POST("Utils/getAllStates")
-    Call<StateModel> userfinacial(@Body States states);
+    Call<StateModel> userState(@Body States s);
+
+
+
+    @POST("Utils/getAllCites")
+    Call<StateModel> userCity(@Body States states);
+
+
+
+
+    @POST("Utils/getAllCites")
+    Call<DefaultResponse> userCreate(@Body RegisterModel registerModel);
+
+
 }
