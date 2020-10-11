@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.all.in.one.pramod.SignIn;
+import com.all.in.one.pramod.models.signInModel.Data;
 import com.all.in.one.pramod.models.signInModel.User;
 
 public class SharedPrefManager {
@@ -35,15 +36,16 @@ public class SharedPrefManager {
 
 
 
-    public void saveUser(User user) {
+    public void saveUser(Data user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         // editor.putInt(KEY_ID, user.getId());
-       /* editor.putString(KEY_USERNAME, user.getName());
+       editor.putString(KEY_USERNAME, user.getCompanyLogo());
+       System.out.print(user.getBranches());
+     /*   editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_EMAIL, user.getEmail());
-        editor.putString(KEY_EMAIL, user.getEmail());
-        editor.putString(KEY_mobile, user.getMobile());
-*/
+        editor.putString(KEY_mobile, user.getMobile());*/
+
         editor.apply();
     }
 

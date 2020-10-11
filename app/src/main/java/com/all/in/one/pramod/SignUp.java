@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,8 +18,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.all.in.one.pramod.app.RetrofitClient;
-
-
 
 
 import com.all.in.one.pramod.models.stateModel.StateModel;
@@ -41,6 +40,7 @@ public class SignUp extends AppCompatActivity {
     private TextInputLayout Name_singup;
     private TextInputLayout mobile_signup;
     private Spinner spinnerState;
+    private Spinner spinnerCity;
     private TextInputLayout name_persion;
     private TextInputLayout address_signup;
     private TextInputLayout landmark_signup;
@@ -52,6 +52,9 @@ public class SignUp extends AppCompatActivity {
     private States states;
 
     ArrayList<String> stateNames = new ArrayList<>();
+    ArrayList<String> CitisNames = new ArrayList<>();
+  // String[] CitisNames = { "balrampur", "Noida", "Aligrath", "Mobai", "kalta"};
+
 
 
     private Button btn_sigup;
@@ -63,20 +66,49 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().setTitle("SignUp");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
+        ArrayList<String> stateCitis = new ArrayList<>();
+
+                  stateCitis.add("Select Cities");
+
+
+
+
+
+
+
         country_code = findViewById(R.id.companycode);
         spinnerState = findViewById(R.id.state);
-         spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-             }
+                System.out.println(i + "opi");
+            }
 
-             @Override
-             public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-             }
-         });
+            }
+        });
 
+        /***********************city*************************************************************/
+
+        spinnerCity = findViewById(R.id.city);
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        City();
         country_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,50 +183,49 @@ public class SignUp extends AppCompatActivity {
         Log.d(gst, "gst");
 
 
-        if (companyCode.length() < 4) {
-            country_code.setError("Company Code  is required ");
-            country_code.requestFocus();
+        if (companyCode.isEmpty()) {
+            Toast.makeText(SignUp.this, "Company Code Required", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(SignUp.this, "Email is Empaty", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-        if (companyCode.length() < 4) {
-            country_code.setError("Company Code  is required ");
-            country_code.requestFocus();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(SignUp.this, "Email Id is invalid", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-
-       /* if (user.length() < 10)  {
-            user_id.setError("Enter valid UserID");
-            user_id.requestFocus();
-            return;
-        }*/
-
-
-
-        /*if (password.length() < 8) {
-            editPass.setError("Password required");
-            editPass.requestFocus();
+        if (mobile.isEmpty()) {
+            Toast.makeText(SignUp.this, "Mobile  number is Required", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (! confirm_pin.equals(password)  )   {
-            editconfirm_pass.setError("Confirm is Not match");
-            editconfirm_pass.requestFocus();
-            return;
 
-        }*/
-    /* if (pass.length() < 8) {
-         password_id.setError("Password required");
-         password_id.requestFocus();
+        if (pin.isEmpty()) {
+            Toast.makeText(SignUp.this, "Pin Code  number is Required", Toast.LENGTH_SHORT).show();
             return;
         }
 
-*/
-        //Log.d(user,"user_id");
-        Log.d(companyCode, "companyCode");
+
+        if (address.isEmpty()) {
+            Toast.makeText(SignUp.this, "Address Code Required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (gst.isEmpty()) {
+            Toast.makeText(SignUp.this, "GST Number is  Required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (pass.isEmpty()) {
+            Toast.makeText(SignUp.this, "Password is Required", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
 
@@ -284,6 +315,71 @@ public class SignUp extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+
+
+    public void City(){
+
+
+
+    /*    String companyCode = country_code.getText().toString();
+        States states = new States(companyCode);
+
+        Call<StateModel> call = RetrofitClient.getInstance().getApi().userfinacial();
+
+
+        call.enqueue(new Callback<StateModel>() {
+            @Override
+            public void onResponse(Call<StateModel> call, Response<StateModel> response) {
+
+                try {
+
+
+                    StateModel stateModel = response.body();
+                    System.out.println(stateModel);
+
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    Log.e("States:", gson.toJson(stateModel));
+                    CitisNames.clear();
+
+
+                    CitisNames.add("Select Cities");
+
+                    if (stateModel.getStatus() == 1) {
+                        for (int i = 0; i < stateModel.getData().size(); i++) {
+
+                            CitisNames.add(stateModel.getData().get(i).getState_name());
+
+                            // DistricNameID.add(financialmodel.getData().get(i).getId());
+                        }
+
+                        ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, CitisNames);
+
+
+                        dataAdapter12.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+                        spinnerState.setAdapter(dataAdapter12);
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cities is  not available", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<StateModel> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+*/
     }
 
 

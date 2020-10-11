@@ -1,11 +1,12 @@
-package com.all.in.one.pramod.models.finacal;
+package com.all.in.one.pramod.models.signInModel;
+
+import android.provider.ContactsContract;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+public class UserSignModel {
 
-public class Fincial {
     @SerializedName("status")
     @Expose
     private Integer status;
@@ -18,7 +19,16 @@ public class Fincial {
         this.message = message;
     }
 
+    @SerializedName("message")
+    @Expose
     private String message;
+
+
+    @SerializedName("data")
+    @Expose
+    private Data data;
+
+
 
 
     public Integer getStatus() {
@@ -29,19 +39,13 @@ public class Fincial {
         this.status = status;
     }
 
-    public List<Datum> getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(Data data) {
         this.data = data;
     }
-
-    @SerializedName("data")
-    @Expose
-    private List<Datum> data = null;
-
-
 
 
 }

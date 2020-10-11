@@ -2,6 +2,7 @@ package com.all.in.one.pramod.app;
 
 import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
+import com.all.in.one.pramod.models.signInModel.UserSignModel;
 import com.all.in.one.pramod.models.signInModel.Users;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
@@ -17,7 +18,7 @@ public interface Api {
     /****************************SignIn**********************************************/
 
     @POST("UserAuth/checkLogin")
-    Call<ResponseBody> userLogin(@Body Users users);
+    Call<UserSignModel> userLogin(@Body Users users);
 
 
     @POST("Utils/getFinancialYears")
