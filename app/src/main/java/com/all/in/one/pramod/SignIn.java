@@ -1,7 +1,6 @@
 package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -10,9 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,29 +18,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.all.in.one.pramod.app.RetrofitClient;
-import com.all.in.one.pramod.models.SharedPrefManager;
+import com.all.in.one.pramod.session.SharedPrefManager;
 import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
 import com.all.in.one.pramod.models.signInModel.Branch;
-import com.all.in.one.pramod.models.signInModel.Data;
+import com.all.in.one.pramod.session.User;
 import com.all.in.one.pramod.models.signInModel.UserSignModel;
 import com.all.in.one.pramod.models.signInModel.Users;
 import com.all.in.one.pramod.navigation.ProfileActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Handler;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
 public class SignIn extends AppCompatActivity {
+
+
     private ProgressDialog progressDialog;
     private TextView textRegister;
     private Button btn_Login;
@@ -248,6 +245,33 @@ public class SignIn extends AppCompatActivity {
 
                 UserSignModel userSignModel = response.body();
                 if (userSignModel.getStatus() == 1) {
+
+                    String user_id =response.body().getData().getUserId();
+                    String user_branch =response.body().getData().getUserBranch();
+                    String  user_emp_type =response.body().getData().getUserEmpType();
+                    String user_type =response.body().getData().getUserType();
+                    String deviceId =response.body().getData().getDeviceId();
+                    String deviceName =response.body().getData().getDeviceName();
+                    String companyLogo =response.body().getData().getCompanyLogo();
+
+                    List<Branch> brancheslist = response.body().getData().getBranches();
+
+
+                         for (int i = 0; i < brancheslist.size(); i++) {
+
+                            FinancialYears.add(brancheslist.get(i).getBranchCode());
+                                      String s=  brancheslist.get(i).getAddress();
+                            DistricNameID.add(brancheslist.get(i).getAddress());
+                            Log.d(s,"global");
+                            System.out.println(brancheslist.get(i).getAddress()+"tata");
+                        }
+
+                    User user = new User(user_id,user_branch,user_emp_type,user_type,deviceId,deviceName,companyLogo);
+                    SharedPrefManager.getInstance(getApplicationContext()).saveUser(user);
+
+
+
+
 
                     Intent intent = new Intent(SignIn.this, ProfileActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -4,7 +4,7 @@ import com.all.in.one.pramod.models.finacal.Datum;
 
 import java.util.List;
 
-public class StateModel {
+public class StateModel{
     private Integer status;
 
     public List<StateData> getData() {

@@ -24,20 +24,21 @@ import com.all.in.one.pramod.app.RetrofitClient;
 
 import com.all.in.one.pramod.models.signUpModel.DefaultResponse;
 import com.all.in.one.pramod.models.signUpModel.RegisterModel;
+import com.all.in.one.pramod.models.stateModel.StateData;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.os.Build.DEVICE;
-
 public class SignUp extends AppCompatActivity {
+
     private ProgressDialog progressDialog;
     private TextInputEditText country_code;
     private TextInputLayout user_id;
@@ -56,9 +57,11 @@ public class SignUp extends AppCompatActivity {
     private States states;
 
     ArrayList<String> stateNames = new ArrayList<>();
+    ArrayList<String> stateId = new ArrayList<>();
+
     ArrayList<String> CitisNames = new ArrayList<>();
 
-
+    String RegionId = "";
     private Button btn_sigup;
 
     @Override
@@ -74,9 +77,22 @@ public class SignUp extends AppCompatActivity {
         spinnerState = findViewById(R.id.state);
         spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                System.out.println(i + "opi");
+
+               int  getid = parent.getSelectedItemPosition();
+
+               String s = String.valueOf(getid);
+
+
+
+                Toast.makeText(SignUp.this, s, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
             }
 
             @Override
@@ -124,6 +140,8 @@ public class SignUp extends AppCompatActivity {
         spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
 
             }
 
@@ -306,8 +324,8 @@ public class SignUp extends AppCompatActivity {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     Log.e("States:", gson.toJson(stateModel));
                     stateNames.clear();
-
-
+                    stateId.clear();
+                     stateId.add("125");
                     stateNames.add("Select State");
 
                     if (stateModel.getStatus() == 1) {
@@ -315,7 +333,7 @@ public class SignUp extends AppCompatActivity {
 
                             stateNames.add(stateModel.getData().get(i).getState_name());
 
-                            // DistricNameID.add(financialmodel.getData().get(i).getId());
+                            stateId.add(stateModel.getData().get(i).getId());
                         }
 
                         ArrayAdapter<String> dataAdapter12 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, stateNames);
@@ -372,7 +390,7 @@ public class SignUp extends AppCompatActivity {
                     if (stateModel.getStatus() == 1) {
                         for (int i = 0; i < stateModel.getData().size(); i++) {
 
-                            CitisNames.add(stateModel.getData().get(i).getState_name());
+                            CitisNames.add(stateModel.getData().get(i).getId());
 
                             // DistricNameID.add(financialmodel.getData().get(i).getId());
                         }

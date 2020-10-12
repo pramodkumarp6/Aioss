@@ -9,7 +9,6 @@ import com.all.in.one.pramod.models.signUpModel.RegisterModel;
 import com.all.in.one.pramod.models.stateModel.StateModel;
 import com.all.in.one.pramod.models.stateModel.States;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;

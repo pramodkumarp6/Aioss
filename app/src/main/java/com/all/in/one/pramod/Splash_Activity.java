@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-    private ProgressDialog progressDialog;
+public class Splash_Activity extends AppCompatActivity {
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
 
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
                     sleep(1000);
 
 
-                    Intent intent =new Intent(MainActivity.this,SignIn.class);
+                    Intent intent =new Intent(Splash_Activity.this,SignIn.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
