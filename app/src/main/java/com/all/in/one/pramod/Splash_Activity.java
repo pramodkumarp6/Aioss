@@ -2,17 +2,21 @@ package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.all.in.one.pramod.databinding.ActivitySplashBinding;
+
 public class Splash_Activity extends AppCompatActivity {
 
-
+            private ActivitySplashBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_splash);
+                   getSupportActionBar().hide();
+
 
 
         Thread t=new Thread() {

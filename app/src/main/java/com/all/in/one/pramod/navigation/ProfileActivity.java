@@ -1,6 +1,7 @@
 package com.all.in.one.pramod.navigation;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.all.in.one.pramod.R;
+import com.all.in.one.pramod.databinding.ActivityProfileBinding;
 import com.all.in.one.pramod.session.SharedPrefManager;
 import com.all.in.one.pramod.session.User;
 import com.bumptech.glide.Glide;
@@ -36,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        ActivityProfileBinding activityProfileBinding= DataBindingUtil.setContentView(this,R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

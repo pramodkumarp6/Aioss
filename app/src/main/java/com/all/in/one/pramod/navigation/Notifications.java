@@ -1,17 +1,19 @@
 package com.all.in.one.pramod.navigation;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.all.in.one.pramod.R;
+import com.all.in.one.pramod.databinding.ActivityNotificationsBinding;
 
 public class Notifications extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications);
+        ActivityNotificationsBinding  notificationsBinding= DataBindingUtil.setContentView(this,R.layout.activity_notifications);
         getSupportActionBar().setTitle("Notification");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

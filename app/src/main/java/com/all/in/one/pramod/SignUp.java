@@ -1,6 +1,7 @@
 package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
+import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -19,9 +20,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.all.in.one.pramod.app.Api;
 import com.all.in.one.pramod.app.RetrofitClient;
 
 
+import com.all.in.one.pramod.databinding.ActivitySignInBinding;
+import com.all.in.one.pramod.databinding.ActivitySignUpBinding;
 import com.all.in.one.pramod.models.signUpModel.DefaultResponse;
 import com.all.in.one.pramod.models.signUpModel.RegisterModel;
 import com.all.in.one.pramod.models.stateModel.StateData;
@@ -61,15 +65,15 @@ public class SignUp extends AppCompatActivity {
 
     ArrayList<String> CitisNames = new ArrayList<>();
 
-    String RegionId = "";
+
     private Button btn_sigup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().setTitle("SignUp");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActivitySignUpBinding activitySignUpBinding= DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
+           getSupportActionBar().setTitle("SignUp");
+           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
 
@@ -175,11 +179,7 @@ public class SignUp extends AppCompatActivity {
 
         password_id = findViewById(R.id.password);
 
-
-        btn_sigup = findViewById(R.id.btnsigup);
-
-        btn_sigup.setOnClickListener(new View.OnClickListener() {
-
+        activitySignUpBinding.btnsigup.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -279,11 +279,12 @@ public class SignUp extends AppCompatActivity {
 
         RegisterModel registerModel = new RegisterModel(companyCode, email, name, mobile, pin, landmark, address, gst, device_id, device_Model, States,city);
 
+        Api apiService = RetrofitClient.getClient(getApplicationContext()).create(Api.class);
 
-        Call<DefaultResponse> call = RetrofitClient.getInstance().getApi().userCreate(registerModel);
+        Call<DefaultResponse> signUpApi= apiService.userCreate(registerModel);
 
 
-        call.enqueue(new Callback<DefaultResponse>() {
+        signUpApi.enqueue(new Callback<DefaultResponse>() {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 progressDialog.dismiss();
@@ -307,11 +308,11 @@ public class SignUp extends AppCompatActivity {
     public void state() {
         String companyCode = country_code.getText().toString();
         States states = new States(companyCode);
+        Api apiService = RetrofitClient.getClient(getApplicationContext()).create(Api.class);
+        Call<StateModel>  stateApi= apiService.userState(states);
 
-        Call<StateModel> call = RetrofitClient.getInstance().getApi().userState(states);
 
-
-        call.enqueue(new Callback<StateModel>() {
+        stateApi.enqueue(new Callback<StateModel>() {
             @Override
             public void onResponse(Call<StateModel> call, Response<StateModel> response) {
 
@@ -365,12 +366,12 @@ public class SignUp extends AppCompatActivity {
 
         String companyCode = country_code.getText().toString();
         States states = new States(companyCode);
+        Api apiService = RetrofitClient.getClient(getApplicationContext()).create(Api.class);
+
+        Call<StateModel> cityApi= apiService.userCity(states);
 
 
-        Call<StateModel> call = RetrofitClient.getInstance().getApi().userCity(states);
-
-
-        call.enqueue(new Callback<StateModel>() {
+        cityApi.enqueue(new Callback<StateModel>() {
             @Override
             public void onResponse(Call<StateModel> call, Response<StateModel> response) {
 

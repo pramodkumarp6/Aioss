@@ -2,6 +2,7 @@ package com.all.in.one.pramod;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.all.in.one.pramod.app.Api;
 import com.all.in.one.pramod.app.RetrofitClient;
+import com.all.in.one.pramod.databinding.ActivitySignInBinding;
 import com.all.in.one.pramod.session.SharedPrefManager;
 import com.all.in.one.pramod.models.finacal.Financial;
 import com.all.in.one.pramod.models.finacal.Fincial;
@@ -43,7 +46,6 @@ public class SignIn extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private TextView textRegister;
-    private Button btn_Login;
     private TextInputEditText country_code;
     private TextInputEditText user_id;
     private TextInputLayout pin_id;
@@ -54,17 +56,17 @@ public class SignIn extends AppCompatActivity {
     ArrayList<String> FinancialYears = new ArrayList<>();
     ArrayList<String> DistricNameID = new ArrayList<>();
     private Handler adapter;
+    private  ActivitySignInBinding activitySignInBinding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
-        getSupportActionBar().setTitle("SignIn");
+          activitySignInBinding= DataBindingUtil.setContentView(this,R.layout.activity_sign_in);
+                           getSupportActionBar().setTitle("SignIn");
 
 
-        textRegister = findViewById(R.id.register);
-        btn_Login = findViewById(R.id.btnlogin);
+
         progressDialog = new ProgressDialog(this);
         spinner_finacil = findViewById(R.id.fnacl);
         spinner_finacil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -157,14 +159,14 @@ public class SignIn extends AppCompatActivity {
         password_id = findViewById(R.id.password);
 
 
-        btn_Login.setOnClickListener(new View.OnClickListener() {
+       activitySignInBinding. btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
 
-        textRegister.setOnClickListener(new View.OnClickListener() {
+        activitySignInBinding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignIn.this, SignUp.class);
@@ -232,12 +234,12 @@ public class SignIn extends AppCompatActivity {
 
 
         progressDialog.show();
+        Api apiService = RetrofitClient.getClient(getApplicationContext()).create(Api.class);
+
+        Call<UserSignModel>  signApi=apiService.userLogin(users);
 
 
-        Call<UserSignModel> call = RetrofitClient.getInstance().getApi().userLogin(users);
-
-
-        call.enqueue(new Callback<UserSignModel>() {
+        signApi.enqueue(new Callback<UserSignModel>() {
             @Override
             public void onResponse(Call<UserSignModel> call, Response<UserSignModel> response) {
 
@@ -303,11 +305,13 @@ public class SignIn extends AppCompatActivity {
     public void financial() {
         String companyCode = country_code.getText().toString();
         Financial financial = new Financial(companyCode);
+        Api apiService = RetrofitClient.getClient(getApplicationContext()).create(Api.class);
 
-        Call<Fincial> call = RetrofitClient.getInstance().getApi().userfinacial(financial);
+
+        Call<Fincial> finacilApi =apiService.userfinacial(financial);
 
 
-        call.enqueue(new Callback<Fincial>() {
+        finacilApi.enqueue(new Callback<Fincial>() {
             @Override
             public void onResponse(Call<Fincial> call, Response<Fincial> response) {
 
